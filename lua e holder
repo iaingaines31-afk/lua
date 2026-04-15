@@ -1,0 +1,23 @@
+local enabled = true
+
+-- toggle with F
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+
+    if input.KeyCode == Enum.KeyCode.F then
+        enabled = not enabled
+        print("Auto E:", enabled and "ON" or "OFF")
+    end
+end)
+
+task.spawn(function()
+    while true do
+        if enabled then
+            keypress(0x45) -- E
+            task.wait(3.5)
+            keyrelease(0x45)
+        end
+
+        task.wait(0.1)
+    end
+end)
